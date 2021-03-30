@@ -114,40 +114,39 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, args):
-        """ Create an object of any class"""
+        """Create an object of any class"""
         if not args:
             print("** class name missing **")
             return
-        else:
-            params = args.split()
-            if params[0] not in HBNBCommand.classes:
-                print("** class doesn't exist **")
-                return
-            new_instance = HBNBCommand.classes[params[0]]()
-            for i in range(1, len(params)):
-                arg = params[i].split('=', 1)
-                value = ""
-                if arg[1][0] == '"' or arg[1][0] == "'":
-                    value = arg[1][1:-1]
-                    if '"' or "'" in value:
-                        value = value.replace('"', '\"')
-                    if "_" in value:
-                        value = value.replace('_', ' ')
+        params = args.split()
+        if params[0] not in HBNBCommand.classes:
+            print("** class doesn't exist **")
+            return
+        new_instance = eval(params[0])()
+        for i in range(1, len(params)):
+            arg = params[i].split('=', 1)
+            value = ""
+            if arg[1][0] == '"' or arg[1][0] == "'":
+                value = arg[1][1:-1]
+                if '"' or "'" in value:
+                    value = value.replace('"', '\"')
+                if "_" in value:
+                    value = value.replace('_', ' ')
+            else:
+                if '.' in arg[1]:
+                    try:
+                        value = float(arg[1])
+                    except:
+                        continue
                 else:
-                    if '.' in arg[1]:
-                        try:
-                            value = float(arg[1])
-                        except:
-                            continue
-                    else:
-                        try:
-                            value = int(arg[1])
-                        except:
-                            continue
-                if value != "":
-                    setattr(new_instance, arg[0], value)
-            print(new_instance.id)
-            new_instance.save()
+                    try:
+                        value = int(arg[1])
+                    except:
+                        continue
+            if value != "":
+                setattr(new_instance, arg[0], value)
+        print(new_instance.id)
+        new_instance.save()
 
     def help_create(self):
         """ Help information for the create method """
