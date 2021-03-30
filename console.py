@@ -112,40 +112,34 @@ class HBNBCommand(cmd.Cmd):
         """ Overrides the emptyline method of CMD """
         pass
 
-    def do_create(self, args):
-        """Create an object of any class"""
-        if not args:
-            print("** class name missing **")
-            return
-        params = args.split()
-        if params[0] not in HBNBCommand.classes:
-            print("** class doesn't exist **")
-            return
-        new_instance = eval(params[0])()
-        for i in range(1, len(params)):
-            arg = params[i].split('=', 1)
-            value = ""
-            if arg[1][0] == '"' or arg[1][0] == "'":
-                value = arg[1][1:-1]
-                if '"' or "'" in value:
-                    value = value.replace('"', '\"')
-                if "_" in value:
-                    value = value.replace('_', ' ')
-            else:
-                if '.' in arg[1]:
-                    try:
-                        value = float(arg[1])
-                    except:
-                        continue
+    def do_create(self, line):
+        """Usage: create <class> <key 1>=<value 2> <key 2>=<value 2> ...
+        Create a new class instance with given keys/values and print its id.
+        """
+        try:
+            if not line:
+                raise SyntaxError()
+            my_list = line.split(" ")
+
+            kwargs = {}
+            for i in range(1, len(my_list)):
+                key, value = tuple(my_list[i].split("="))
+                if value[0] == '"':
+                    value = value.strip('"').replace("_", " ")
                 else:
                     try:
-                        value = int(arg[1])
-                    except:
+                        value = eval(value)
+                    except (SyntaxError, NameError):
                         continue
-            if value != "":
-                setattr(new_instance, arg[0], value)
-        print(new_instance.id)
-        new_instance.save()
+                kwargs[key] = value
+
+            if kwargs == {}:
+                obj = eval(my_list[0])()
+            else:
+                obj = eval(my_list[0])(**kwargs)
+            print(obj.id)
+            obj.save()
+
 
     def help_create(self):
         """ Help information for the create method """
