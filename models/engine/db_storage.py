@@ -31,32 +31,22 @@ class DBStorage():
                 Base.metadata.drop_all(self.__engine)
     
     def all(self, cls=None):
-        """query on databases"""
-        """ classes = ['BaseModel', 'User', 'Place',
-                   'State', 'City', 'Amenity','Review']
-        new_dict = {}
-        if cls in classes:
-            for obj in self.__session.query(cls).all():
-                key = cls.__class__.__name__ + '.' + obj.id
-                new_dict[key] = obj
-        if cls is None:
-            for clase in classes:
-                for obj in self.__session.query(clase).all():
-                    key = clase.__class__.__name__ + '.' + obj.id
-                    new_dict[key] = obj
-        return new_dict"""
         if cls is None:
             objs = self.__session.query(State).all()
-            objs.extend(self.__session.query(City).all())
-            objs.extend(self.__session.query(User).all())
-            objs.extend(self.__session.query(Place).all())
-            objs.extend(self.__session.query(Review).all())
-            objs.extend(self.__session.query(Amenity).all())
+            objs += self.__session.query(City).all()
+            objs += self.__session.query(User).all()
+            objs += self.__session.query(Place).all()
+            objs += self.__session.query(Review).all()
+            objs += self.__session.query(Amenity).all()
         else:
             if type(cls) == str:
                 cls = eval(cls)
             objs = self.__session.query(cls)
-        return {"{}.{}".format(type(o).__name__, o.id): o for o in objs}
+        new_dict = {}
+        for obj in objs:
+            key = type(obj).__name__ + "." + obj.id
+            new_dict[key] = obj
+        return new_dict
 
     def new(self, obj):
         """add object to database"""
