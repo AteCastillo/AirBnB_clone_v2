@@ -1,4 +1,4 @@
-1;95;0c#!/usr/bin/python3
+#!/usr/bin/python3
 """New engine to save data"""
 from os import getenv
 from models.user import User
@@ -7,7 +7,7 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
-from models.base_model import  Base
+from models.base_model import Base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import scoped_session
@@ -25,11 +25,12 @@ class DBStorage():
         hostname = getenv('HBNB_MYSQL_HOST')
         database = getenv('HBNB_MYSQL_DB')
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'
-                               .format(username, passw, hostname, database),
-                               pool_pre_ping=True)
+                                      .format(username, passw,
+                                              hostname, database),
+                                      pool_pre_ping=True)
         if getenv('HBNB_ENV') == "test":
                 Base.metadata.drop_all(self.__engine)
-    
+
     def all(self, cls=None):
         if cls is None:
             objs = self.__session.query(State).all()
@@ -52,9 +53,9 @@ class DBStorage():
         """add object to database"""
         if obj:
             self.__session.add(obj)
-    
+
     def save(self):
-        """commit all changes on the current database""" 
+        """commit all changes on the current database"""
         self.__session.commit()
 
     def delete(self, obj=None):
@@ -65,6 +66,7 @@ class DBStorage():
     def reload(self):
         """create tables"""
         Base.metadata.create_all(self.__engine)
-        Session_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        Session_factory = sessionmaker(bind=self.__engine,
+                                       expire_on_commit=False)
         Session = scoped_session(Session_factory)
         self.__session = Session()
