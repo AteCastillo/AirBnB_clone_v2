@@ -43,6 +43,7 @@ class Place(BaseModel, Base):
                 if review.place_id == self.id:
                     reviews.append(review)
             return reviews
+
         @property
         def get_amenities(self):
             '''Getter of amenities'''
@@ -51,9 +52,9 @@ class Place(BaseModel, Base):
                 if amenity.amenity_ids == self.id:
                     amenities.append(amenity)
             return amenities
+
         @property
         def set_amenities(self, amenity):
             '''Setter of amenity'''
             if type(amenity) is Amenity:
                 self.append(amenity.id)
-
