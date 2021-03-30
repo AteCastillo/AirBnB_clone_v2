@@ -8,7 +8,6 @@ import models
 
 Base = declarative_base()
 
-
 class BaseModel:
     """A base class for all hbnb models"""
     id = Column(String(60), primary_key=True, nullable=False)
@@ -18,7 +17,10 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         """Initialization function"""
         time_format = "%Y-%m-%dT%H:%M:%S.%f"
-        if len(kwargs) != 0:
+        self.id = str(uuid4())
+        self.created_at = datetime.today()
+        self.updated_at = datetime.today()
+        if kwargs:
             for key, value in kwargs.items():
                 if key == "__class__":
                     continue
@@ -27,10 +29,6 @@ class BaseModel:
                     setattr(self, key, current)
                 else:
                     setattr(self, key, value)
-        else:
-            self.id = str(uuid4())
-            self.created_at = datetime.today()
-            self.updated_at = datetime.today()
 
     def __str__(self):
         """Returns a string representation of the instance"""
@@ -48,7 +46,7 @@ class BaseModel:
         dictionary = {}
         dictionary.update(self.__dict__)
         dictionary.update({'__class__':
-                           (str(type(self)).split('.')[-1]).split('\'')[0]})
+                          (str(type(self)).split('.')[-1]).split('\'')[0]})
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
         for key in self.__dict__.keys():

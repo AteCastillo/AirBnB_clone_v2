@@ -19,7 +19,7 @@ class DBStorage():
     __session = None
 
     def __init__(self):
-        """To instantiate the clas"""
+        """to instantiate the clas"""
         username = getenv('HBNB_MYSQL_USER')
         passw = getenv('HBNB_MYSQL_PWD')
         hostname = getenv('HBNB_MYSQL_HOST')
@@ -59,21 +59,21 @@ class DBStorage():
         return {"{}.{}".format(type(o).__name__, o.id): o for o in objs}
 
     def new(self, obj):
-        """Add object to database"""
+        """add object to database"""
         if obj:
             self.__session.add(obj)
     
     def save(self):
-        """Commit all changes on the current database""" 
+        """commit all changes on the current database""" 
         self.__session.commit()
 
     def delete(self, obj=None):
-        """Delete object"""
+        """delete object"""
         if obj:
             self.__session.delete(obj)
 
     def reload(self):
-        """Create tables"""
+        """create tables"""
         Base.metadata.create_all(self.__engine)
         Session_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(Session_factory)
