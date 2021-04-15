@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
 # sets up your web servers for the deployment of web_static
 apt-get update
-if [ ! -x /usr/sbin/nginx ];
-then
-        apt-get install nginx -y
-fi
+apt-get install nginx -y
 mkdir -p /data/web_static/releases/test
 mkdir -p /data/web_static/shared/
 echo 'hola Atenea' > /data/web_static/releases/test/index.html
