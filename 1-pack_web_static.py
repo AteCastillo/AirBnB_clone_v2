@@ -5,12 +5,17 @@ using the function do_pack'''
 
 from fabric.api import *
 from os.path import isdir
-import datetime
+from datetime import datetime
 
 
 def do_pack():
-    if not isdir('versions'):
-        run('mkdir /versions')
-    today = datetime.date.today()
-    new_date = today.strftime("%Y%m%d%H%M%S")
-    local('tar zcvf web_static_{}.tgz web_static'.format(new_date))
+        '''convert the content of a dir to a tar file'''
+        if not isdir('versions'):
+                if local("mkdir versions").failed:
+                        return None
+        now = datetime.now()
+        formated = now.strftime("%Y%m%d%H%M%S")
+        path = "versions/web_static_{}.tgz".format(formated)
+        if local("tar -cvzf {} web_static".format(path)).failed:
+                return None
+        return path
