@@ -3,31 +3,33 @@
 using the function do_deploy''',
 
 from fabric.contrib import files
-from fabric.api import env, put, run
-import os
+from fabric.api import *
+from os import path
 
-env.hosts = ['34.73.222.49', '54.82.121.70']
+env.hosts = ['34.74.47.238', '35.231.230.80']
 
 
 def do_deploy(archive_path):
-    """Function for deploy"""
-    if not os.path.exists(archive_path):
+    """distributes an archive to your web servers, using the function do_deploy"""
+    if not path.exists(archive_path):
         return False
 
-    data_path = '/data/web_static/releases/'
-    tmp = archive_path.split('.')[0]
-    name = tmp.split('/')[1]
-    dest = data_path + name
-
+    file = archive_path.split('/')
+    file_withextension = file[1]
+    file0 = file_withextension.split('.')
+    file_noextension = file0[0]
+    new_tmpfile = "/tmp/{}".format(file_withextension)
+    destination = "/data/web_static/releases"
+    # print('mv {}/{}/web_static/* {}/{}'.format(destination, file_noextension, destination, file_noextension))
     try:
-        put(archive_path, '/tmp')
-        run('sudo mkdir -p {}'.format(dest))
-        run('sudo tar -xzf /tmp/{}.tgz -C {}'.format(name, dest))
-        run('sudo rm -f /tmp/{}.tgz'.format(name))
-        run('sudo mv {}/web_static/* {}/'.format(dest, dest))
-        run('sudo rm -rf {}/web_static'.format(dest))
-        run('sudo rm -rf /data/web_static/current')
-        run('sudo ln -s {} /data/web_static/current'.format(dest))
+        put(archive_path, new_tmpfile)
+        run('mkdir -p {}/{}'.format(destination, file_noextension))
+        run('tar -xzf {} -C {}/{}'.format(new_tmpfile, destination, file_noextension))
+        run('rm -f {}'.format(new_tmpfile))
+        run('mv {}/{}/web_static/* {}/{}'.format(destination, file_noextension, destination, file_noextension))
+        run('rm -rf {}/{}/web_static'.format(destination, file_noextension))
+        run('rm -rf /data/web_static/current')
+        run('ln -s {}/{} /data/web_static/current'.format(destination, file_noextension))
         return True
     except:
         return False
