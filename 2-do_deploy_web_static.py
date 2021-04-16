@@ -8,6 +8,7 @@ import os
 
 env.hosts = ['34.73.222.49', '54.82.121.70']
 
+
 def do_deploy(archive_path):
     """Function for deploy"""
     if not os.path.exists(archive_path):

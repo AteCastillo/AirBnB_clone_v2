@@ -3,6 +3,7 @@
 the web_static folder of your AirBnB Clone repo,
 using the function do_pack'''
 
+
 def do_pack():
     """Gerenate tgz."""
     timestamp = time.strftime("%Y%m%d%H%M%S")
