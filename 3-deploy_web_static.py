@@ -4,7 +4,8 @@ to your web servers, using the function deploy'''
 
 from fabric.contrib import files
 from fabric.api import *
-from os import *
+from os.path import isdir
+from os import path
 from datetime import datetime
 
 env.hosts = ['34.74.47.238', '35.231.230.80']
