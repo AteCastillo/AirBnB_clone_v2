@@ -12,16 +12,16 @@ env.hosts = ['34.74.47.238', '35.231.230.80']
 
 
 def do_pack():
-        '''convert the content of a dir to a tar file'''
-        if not isdir('versions'):
-                if local("mkdir versions").failed:
-                        return None
-        now = datetime.now()
-        formated = now.strftime("%Y%m%d%H%M%S")
-        path = "versions/web_static_{}.tgz".format(formated)
-        if local("tar -cvzf {} web_static".format(path)).failed:
-                return None
-        return path
+    '''convert the content of a dir to a tar file'''
+    if not isdir('versions'):
+        if local("mkdir versions").failed:
+            return None
+    now = datetime.now()
+    formated = now.strftime("%Y%m%d%H%M%S")
+    path = "versions/web_static_{}.tgz".format(formated)
+    if local("tar -cvzf {} web_static".format(path)).failed:
+        return None
+    return path
 
 
 def do_deploy(archive_path):
@@ -56,6 +56,7 @@ def do_deploy(archive_path):
 
 
 def deploy():
+    '''Deploy Function'''
     store_path = do_pack()
     if not store_path:
         return False
