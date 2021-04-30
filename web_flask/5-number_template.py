@@ -14,22 +14,26 @@ def hello():
 
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
+    '''new route'''
     return 'HBNB'
 
 
 @app.route('/c/<text>', strict_slashes=False)
 def text(text):
+    '''new route with variable'''
     return 'C {}'.format(str(text.replace('_', ' ')))
 
 
 @app.route('/python', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def texts(text='is cool'):
+    '''new route with text variable'''
     return 'Python {}'.format(str(text.replace('_', ' ')))
 
 
 @app.route('/number/<n>', strict_slashes=False)
 def number(n):
+    '''new route with int variable'''
     try:
         return '{} is a number'.format(int(n))
     except:
@@ -38,6 +42,7 @@ def number(n):
 
 @app.route('/number_template/<n>', strict_slashes=False)
 def number_template(n):
+    '''new route with int variable and render'''
     try:
         return render_template('5-number.html', n=(int(n)))
     except:

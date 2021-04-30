@@ -14,11 +14,13 @@ def hello():
 
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
+    '''new route'''
     return 'HBNB'
 
 
 @app.route('/c/<text>', strict_slashes=False)
 def text(text):
+    '''new route with variable'''
     return 'C {}'.format(str(text.replace('_', ' ')))
 
 if __name__ == '__main__':
