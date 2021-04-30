@@ -18,6 +18,7 @@ class State(BaseModel, Base):
     else:
         @property
         def cities(self):
+            '''getter property'''
             cities = []
             for city in list(models.storage.all(City).values()):
                 if city.state_id == self.id:
