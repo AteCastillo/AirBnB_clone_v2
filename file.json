@@ -1,47 +1,40 @@
 {
-  "State.672d920f-2b74-4011-a97d-637650f51c9f": {
-    "id": "672d920f-2b74-4011-a97d-637650f51c9f",
-    "created_at": "2021-04-30T19:34:24.231805",
-    "updated_at": "2021-04-30T19:34:24.231960",
+  "State.9aaa1f9a-b961-4775-bb8c-0b080251f5f8": {
+    "id": "9aaa1f9a-b961-4775-bb8c-0b080251f5f8",
+    "created_at": "2021-05-01T18:50:29.045920",
+    "updated_at": "2021-05-01T18:50:29.046053",
     "name": "California",
     "__class__": "State"
   },
-  "State.909545ef-ce1c-4d0d-b018-73d786142c27": {
-    "id": "909545ef-ce1c-4d0d-b018-73d786142c27",
-    "created_at": "2021-04-30T19:34:24.232816",
-    "updated_at": "2021-04-30T19:34:24.232896",
+  "State.53c8c7d1-1db7-4e81-89dd-56207cb6b58d": {
+    "id": "53c8c7d1-1db7-4e81-89dd-56207cb6b58d",
+    "created_at": "2021-05-01T18:50:29.048881",
+    "updated_at": "2021-05-01T18:50:29.049063",
     "name": "Arizona",
     "__class__": "State"
   },
-  "City.dfc4a5eb-9e8e-4199-90af-801f04a9acc7": {
-    "id": "dfc4a5eb-9e8e-4199-90af-801f04a9acc7",
-    "created_at": "2021-04-30T19:34:24.234131",
-    "updated_at": "2021-04-30T19:34:24.234324",
-    "state_id": "672d920f-2b74-4011-a97d-637650f51c9f",
+  "City.fa20bf68-2291-4cc4-8b91-e950b2660982": {
+    "id": "fa20bf68-2291-4cc4-8b91-e950b2660982",
+    "created_at": "2021-05-01T18:50:29.050236",
+    "updated_at": "2021-05-01T18:50:29.050344",
+    "state_id": "9aaa1f9a-b961-4775-bb8c-0b080251f5f8",
     "name": "Napa",
     "__class__": "City"
   },
-  "City.0fdb589a-46c3-4ac0-aa84-eaa43092ff36": {
-    "id": "0fdb589a-46c3-4ac0-aa84-eaa43092ff36",
-    "created_at": "2021-04-30T19:34:24.235362",
-    "updated_at": "2021-04-30T19:34:24.235466",
-    "state_id": "672d920f-2b74-4011-a97d-637650f51c9f",
+  "City.4810f430-efc0-4ff5-953c-61920d1075a5": {
+    "id": "4810f430-efc0-4ff5-953c-61920d1075a5",
+    "created_at": "2021-05-01T18:50:29.051502",
+    "updated_at": "2021-05-01T18:50:29.051601",
+    "state_id": "9aaa1f9a-b961-4775-bb8c-0b080251f5f8",
     "name": "Sonoma",
     "__class__": "City"
   },
-  "City.563b4437-e0d8-483f-8e33-1ceb066e187d": {
-    "id": "563b4437-e0d8-483f-8e33-1ceb066e187d",
-    "created_at": "2021-04-30T19:34:24.237025",
-    "updated_at": "2021-04-30T19:34:24.237117",
-    "state_id": "909545ef-ce1c-4d0d-b018-73d786142c27",
+  "City.28db3965-efa2-4499-a27b-7aa9f33d221b": {
+    "id": "28db3965-efa2-4499-a27b-7aa9f33d221b",
+    "created_at": "2021-05-01T18:50:29.058022",
+    "updated_at": "2021-05-01T18:50:29.058211",
+    "state_id": "53c8c7d1-1db7-4e81-89dd-56207cb6b58d",
     "name": "Page",
     "__class__": "City"
-  },
-  "State.5fcfdad3-5222-4871-9288-cbf4f68bf7cc": {
-    "id": "5fcfdad3-5222-4871-9288-cbf4f68bf7cc",
-    "created_at": "2021-04-30T19:36:39.778387",
-    "updated_at": "2021-04-30T19:36:39.778612",
-    "name": "California",
-    "__class__": "State"
   }
 }
