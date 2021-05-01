@@ -43,7 +43,7 @@ def number(n):
 @app.route('/number_template/<n>', strict_slashes=False)
 def number_template(n):
     '''new route with int variable and render'''
-    return render_template('5-number.html', n=(int(n)))
+    return render_template('5-number.html', n=(n))
 
 if __name__ == '__main__':
     app.run()
