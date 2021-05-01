@@ -40,10 +40,13 @@ def number(n):
         abort(404)
 
 
-@app.route('/number_template/<n>', strict_slashes=False)
+@app.route('/number_template/<int:n>', strict_slashes=False)
 def number_template(n):
     '''new route with int variable and render'''
-    return render_template('5-number.html', n=(n))
+    try:
+        return render_template('5-number.html', n=(int(n)))
+    except:
+        abort(404)
 
 if __name__ == '__main__':
     app.run()
