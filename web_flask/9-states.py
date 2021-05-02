@@ -14,7 +14,7 @@ def states_id(id=None):
     """Displays an HTML page with info about <id>, if it exists."""
     states = storage.all("State")
     key = "{}.{}".format('State', id)
-    return render_template("9-states.html", states=states, key=key, id=id)    
+    return render_template("9-states.html", states=states, key=key, id=id)
 
 
 @app.teardown_appcontext
